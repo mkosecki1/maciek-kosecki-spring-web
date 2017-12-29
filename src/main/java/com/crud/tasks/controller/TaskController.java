@@ -12,6 +12,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/task")
+@CrossOrigin(origins = "*")
 public class TaskController {
     @Autowired
     private DbService service;
@@ -22,11 +23,6 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
     public List<TaskDto> getTasks(){
         return taskMapper.mapToTaskDtoList(service.getAllTasks());
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "getTasksId")
-    public TaskDto getTasksId(@RequestParam Long taskId){
-        return taskMapper.mapToTaskDto(service.getTasksById(taskId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
