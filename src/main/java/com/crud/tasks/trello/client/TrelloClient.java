@@ -42,14 +42,7 @@ public class TrelloClient {
                 .queryParam("lists", "all").build().encode().toUri();
 
         TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-
-        /*
-        if(boardsResponse != null){
-            return Arrays.asList(boardsResponse);
-        }
-        */
         return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
-        //return new ArrayList<>();
     }
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto){
