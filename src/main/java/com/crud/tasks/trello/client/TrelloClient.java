@@ -32,11 +32,10 @@ public class TrelloClient {
     private static final String TOKEN = "token";
     private static final String FIELDS = "fields";
 
-
-
     @Autowired
     private RestTemplate restTemplate;
 
+    /*
     public List<TrelloBoardDto> getTrelloBoards(){
         URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUsername + "/boards")
                 .queryParam(KEY,trelloAppKey)
@@ -50,9 +49,20 @@ public class TrelloClient {
             return Arrays.asList(boardsResponse);
         }
         */
-        return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
+        //return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
         //return new ArrayList<>();
 
+    //}
+
+    private URI createTrelloBoardsURI(){
+        return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUsername + "/boards")
+                .queryParam(KEY,trelloAppKey)
+                .queryParam(TOKEN, trelloToken)
+                .queryParam(FIELDS,"name,id").build().encode().toUri();
     }
 
+    public List<TrelloBoardDto> getTrelloBoards(){
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(createTrelloBoardsURI(), TrelloBoardDto[].class);
+        return Arrays.asList(Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
+    }
 }
