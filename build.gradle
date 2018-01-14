@@ -36,7 +36,7 @@ dependencies {
 	compile('mysql:mysql-connector-java')
 	compile('mysql:mysql-connector-java')
 
-	//compile('org.postgresql:postgresql')
+	compile('org.postgresql:postgresql')
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
