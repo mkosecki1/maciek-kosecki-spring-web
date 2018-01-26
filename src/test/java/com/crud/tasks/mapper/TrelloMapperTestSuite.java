@@ -9,16 +9,14 @@ import java.util.List;
 
 public class TrelloMapperTestSuite {
 
-    TrelloMapper trelloMapper = new TrelloMapper();
-    List<TrelloListDto> trelloListDto = new ArrayList<>();
-    List<TrelloBoardDto> trelloBoardDto = new ArrayList<>();
-    List<TrelloBoard> trelloBoard = new ArrayList<>();
-    List<TrelloList> trelloList = new ArrayList<>();
+    private TrelloMapper trelloMapper = new TrelloMapper();
 
     @Test
     public void testMapToBoards() throws Exception {
         //Given
+        List<TrelloListDto> trelloListDto = new ArrayList<>();
         trelloListDto.add(new TrelloListDto("01", "List test", false));
+        List<TrelloBoardDto> trelloBoardDto = new ArrayList<>();
         trelloBoardDto.add(new TrelloBoardDto("1","Test1", trelloListDto));
         //When
         List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloBoardDto);
@@ -32,7 +30,9 @@ public class TrelloMapperTestSuite {
     @Test
     public void testMapToBoardsDto() throws Exception {
         //Given
+        List<TrelloList> trelloList = new ArrayList<>();
         trelloList.add(new TrelloList("01", "List test", false));
+        List<TrelloBoard> trelloBoard = new ArrayList<>();
         trelloBoard.add(new TrelloBoard("001","Test001",trelloList));
         //When
         List<TrelloBoardDto> trelloBoardDto = trelloMapper.mapToBoardsDto(trelloBoard);
@@ -46,6 +46,7 @@ public class TrelloMapperTestSuite {
     @Test
     public void testMapToList() throws Exception {
         //Given
+        List<TrelloListDto> trelloListDto = new ArrayList<>();
         trelloListDto.add(new TrelloListDto("02", "List test 2", false));
         //When
         List<TrelloList> trelloList = trelloMapper.mapToList(trelloListDto);
@@ -59,6 +60,7 @@ public class TrelloMapperTestSuite {
     @Test
     public void testMapToListDto() throws Exception {
         //Given
+        List<TrelloList> trelloList = new ArrayList<>();
         trelloList.add(new TrelloList("03", "List test 3", false));
         //When
         List<TrelloListDto> trelloListDto = trelloMapper.mapToListDto(trelloList);
